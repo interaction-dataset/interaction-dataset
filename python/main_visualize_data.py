@@ -26,13 +26,14 @@ from utils import dict_utils
 
 
 def update_plot():
-    global fig, timestamp, title_text, track_dictionary, patches_dict, text_dict, axes
+    global fig, timestamp, title_text, track_dictionary, patches_dict, text_dict, axes, pedestrian_dictionary
     # update text and tracks based on current timestamp
     assert(timestamp <= timestamp_max), "timestamp=%i" % timestamp
     assert(timestamp >= timestamp_min), "timestamp=%i" % timestamp
     assert(timestamp % dataset_types.DELTA_TIMESTAMP_MS == 0), "timestamp=%i" % timestamp
     title_text.set_text("\nts = {}".format(timestamp))
-    tracks_vis.update_objects_plot(timestamp, track_dictionary, patches_dict, text_dict, axes)
+    tracks_vis.update_objects_plot(timestamp, patches_dict, text_dict, axes,
+                                   track_dict=track_dictionary, pedest_dict=pedestrian_dictionary)
     fig.canvas.draw()
 
 
@@ -87,11 +88,15 @@ if __name__ == "__main__":
     parser.add_argument("scenario_name", type=str, help="Name of the scenario (to identify map and folder for track "
                         "files)", nargs="?")
     parser.add_argument("track_file_number", type=int, help="Number of the track file (int)", default=0, nargs="?")
+    parser.add_argument("load_mode", type=str, help="Dataset to load (vehicle, pedestrian, or both)", default="both",
+                        nargs="?")
     parser.add_argument("--start_timestamp", type=int, nargs="?")
     args = parser.parse_args()
 
     if args.scenario_name is None:
         raise IOError("You must specify a scenario. Type --help for help.")
+    if args.load_mode != "vehicle" and args.load_mode != "pedestrian" and args.load_mode != "both":
+        raise IOError("Invalid load command. Use 'vehicle', 'pedestrian', or 'both'")
 
     # check folders and files
     error_string = ""
@@ -103,6 +108,9 @@ if __name__ == "__main__":
     track_file_prefix = "vehicle_tracks_"
     track_file_ending = ".csv"
     track_file_name = scenario_dir + "/" + track_file_prefix + str(args.track_file_number).zfill(3) + track_file_ending
+    pedestrian_file_prefix = "pedestrian_tracks_"
+    pedestrian_file_ending = ".csv"
+    pedestrian_file_name = scenario_dir + "/" + pedestrian_file_prefix + str(args.track_file_number).zfill(3) + pedestrian_file_ending
     if not os.path.isdir(tracks_dir):
         error_string += "Did not find track file directory \"" + tracks_dir + "\"\n"
     if not os.path.isdir(maps_dir):
@@ -113,6 +121,10 @@ if __name__ == "__main__":
         error_string += "Did not find lanelet map file \"" + lanelet_map_file + "\"\n"
     if not os.path.isfile(track_file_name):
         error_string += "Did not find track file \"" + track_file_name + "\"\n"
+    if not os.path.isfile(pedestrian_file_name):
+        flag_ped = 0
+    else:
+        flag_ped = 1
     if error_string != "":
         error_string += "Type --help for help."
         raise IOError(error_string)
@@ -134,13 +146,28 @@ if __name__ == "__main__":
 
     # load the tracks
     print("Loading tracks...")
-    track_dictionary = dataset_reader.read_tracks(track_file_name)
+    track_dictionary = None
+    pedestrian_dictionary = None
+    if args.load_mode == 'both':
+        track_dictionary = dataset_reader.read_tracks(track_file_name)
+        if flag_ped:
+            pedestrian_dictionary = dataset_reader.read_pedestrian(pedestrian_file_name)
+    elif args.load_mode == 'vehicle':
+        track_dictionary = dataset_reader.read_tracks(track_file_name)
+    elif args.load_mode == 'pedestrian':
+        pedestrian_dictionary = dataset_reader.read_pedestrian(pedestrian_file_name)
 
     timestamp_min = 1e9
     timestamp_max = 0
-    for key, track in dict_utils.get_item_iterator(track_dictionary):
-        timestamp_min = min(timestamp_min, track.time_stamp_ms_first)
-        timestamp_max = max(timestamp_max, track.time_stamp_ms_last)
+
+    if track_dictionary is not None:
+        for key, track in dict_utils.get_item_iterator(track_dictionary):
+            timestamp_min = min(timestamp_min, track.time_stamp_ms_first)
+            timestamp_max = max(timestamp_max, track.time_stamp_ms_last)
+    else:
+        for key, track in dict_utils.get_item_iterator(pedestrian_dictionary):
+            timestamp_min = min(timestamp_min, track.time_stamp_ms_first)
+            timestamp_max = max(timestamp_max, track.time_stamp_ms_last)
 
     if args.start_timestamp is None:
         args.start_timestamp = timestamp_min
