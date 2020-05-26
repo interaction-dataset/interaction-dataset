@@ -7,6 +7,14 @@ try:
 except ImportError:
     print("Could not import csv, but it's needed to load the track files.")
 
+try:
+    print("Trying to import csv (for loading track files).")
+    import shutil
+    print("ok")
+except ImportError:
+    print("Could not import shutil, but it's needed to load the track files.")
+
+
 lanelet2_ok = False
 try:
     print("\nTrying to import lanelet2 (for loading maps).")
@@ -41,7 +49,6 @@ except ImportError:
     else:
         print("  Since lanelet2 also does not work, you need to install this to be able to load and visualize maps.")
 
-
 try:
     print("\nTrying to import argparse (argument parsing for loading and visualizing tracks).")
     import argparse
@@ -55,6 +62,13 @@ try:
     print("ok")
 except ImportError:
     print("Could not import os.")
+
+try:
+    print("\nTrying to import sys.")
+    import sys
+    print("ok")
+except ImportError:
+    print("Could not import sys.")
 
 try:
     print("\nTrying to import time (for scenario playback).")
@@ -76,10 +90,18 @@ try:
     print("ok")
 except ImportError:
     print("Could not import matplotlib.")
-
+    
 try:
     print("\nTrying to import numpy (for visualizing tracks).")
     import numpy
     print("ok")
 except ImportError:
     print("Could not import numpy.")
+
+try:
+    print("\nTrying to import functools (for visualizing tracks).")
+    import functools
+    print("ok")
+except ImportError:
+    print("Could not import functools.")
+

@@ -20,7 +20,7 @@ class MotionState:
 
 class Track:
     def __init__(self, id):
-        assert isinstance(id, int)
+        # assert isinstance(id, int)
         self.track_id = id
         self.agent_type = None
         self.length = None
