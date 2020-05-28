@@ -5,7 +5,7 @@ import matplotlib.patches
 import matplotlib.transforms
 import numpy as np
 
-from utils.dataset_types import Track, MotionState
+from .dataset_types import Track, MotionState
 
 
 def rotate_around_center(pts, center, yaw):
