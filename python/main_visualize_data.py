@@ -152,6 +152,7 @@ if __name__ == "__main__":
         track_dictionary = dataset_reader.read_tracks(track_file_name)
         if flag_ped:
             pedestrian_dictionary = dataset_reader.read_pedestrian(pedestrian_file_name)
+
     elif args.load_mode == 'vehicle':
         track_dictionary = dataset_reader.read_tracks(track_file_name)
     elif args.load_mode == 'pedestrian':
