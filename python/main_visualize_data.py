@@ -42,7 +42,7 @@ def start_playback():
     playback_stopped = False
     plt.ion()
     while timestamp < timestamp_max and not playback_stopped:
-        timestamp += dataset_types.DELTA_TIMESTAMP_MS
+        timestamp += 2*dataset_types.DELTA_TIMESTAMP_MS
         start_time = time.time()
         update_plot()
         end_time = time.time()
