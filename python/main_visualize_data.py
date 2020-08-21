@@ -111,7 +111,6 @@ if __name__ == "__main__":
     lanelet_map_ending = ".osm"
     lanelet_map_file = os.path.join(maps_dir, args.scenario_name + lanelet_map_ending)
 
-    scenario_dir = tracks_dir + "/" + args.scenario_name
     scenario_dir = os.path.join(tracks_dir, args.scenario_name)
 
     track_file_name = os.path.join(
