@@ -4,15 +4,8 @@
 * for details about and access to the dataset, visit https://interaction-dataset.com/
 
 ## Required Python Packages
-* `csv`: for reading the csv track files
-* to work with the map:
-  * either `lanelet2` for most convenient map usage
-    * see https://github.com/fzi-forschungszentrum-informatik/Lanelet2 for details
-  * or
-    * `pyproj`
-    * `xml`
-* `math`, `numpy`, `os`,`argparse`, `time` and `matplotlib` for visualizing the scenarios
-* use `test_imports.py` to test whether you have all necessary packages installed
+* see [requirements.txt](requirements.txt)
+* install them with `$ pip install -r requirements.txt`
 
 ## Usage
 
