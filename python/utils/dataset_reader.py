@@ -2,7 +2,7 @@
 
 import csv
 
-from utils.dataset_types import MotionState, Track
+from .dataset_types import MotionState, Track
 
 
 class Key:

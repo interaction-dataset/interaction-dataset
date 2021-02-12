@@ -1,0 +1,10 @@
+#### to work with the map
+pyproj
+###### not that we encourage to use lanelet2 instead,
+###### see https://github.com/fzi-forschungszentrum-informatik/Lanelet2 for details
+
+#### for visualization
+numpy
+matplotlib
+
+#### use `utils/check_imports.py` to test whether you have all necessary packages installed

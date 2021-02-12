@@ -100,17 +100,28 @@ if __name__ == "__main__":
 
     # check folders and files
     error_string = ""
-    tracks_dir = "../recorded_trackfiles"
-    maps_dir = "../maps"
+
+    # root directory is one above main_visualize_data.py file
+    # i.e. the root directory of this project
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    tracks_dir = os.path.join(root_dir, "recorded_trackfiles")
+    maps_dir = os.path.join(root_dir, "maps")
+
     lanelet_map_ending = ".osm"
-    lanelet_map_file = maps_dir + "/" + args.scenario_name + lanelet_map_ending
-    scenario_dir = tracks_dir + "/" + args.scenario_name
-    track_file_prefix = "vehicle_tracks_"
-    track_file_ending = ".csv"
-    track_file_name = scenario_dir + "/" + track_file_prefix + str(args.track_file_number).zfill(3) + track_file_ending
-    pedestrian_file_prefix = "pedestrian_tracks_"
-    pedestrian_file_ending = ".csv"
-    pedestrian_file_name = scenario_dir + "/" + pedestrian_file_prefix + str(args.track_file_number).zfill(3) + pedestrian_file_ending
+    lanelet_map_file = os.path.join(maps_dir, args.scenario_name + lanelet_map_ending)
+
+    scenario_dir = os.path.join(tracks_dir, args.scenario_name)
+
+    track_file_name = os.path.join(
+        scenario_dir,
+        "vehicle_tracks_" + str(args.track_file_number).zfill(3) + ".csv"
+    )
+    pedestrian_file_name = os.path.join(
+        scenario_dir,
+        "pedestrian_tracks_" + str(args.track_file_number).zfill(3) + ".csv"
+    )
+
     if not os.path.isdir(tracks_dir):
         error_string += "Did not find track file directory \"" + tracks_dir + "\"\n"
     if not os.path.isdir(maps_dir):
