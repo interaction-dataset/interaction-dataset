@@ -62,6 +62,14 @@ def draw_lanelet_map(laneletmap, axes):
             type_dict = dict(color="black", linewidth=1, zorder=10)
         elif ls.attributes["type"] == "traffic_sign":
             continue
+        elif ls.attributes["type"] == "building":
+            type_dict = dict(color="pink", zorder=1, linewidth=5)
+        elif ls.attributes["type"] == "spawnline":
+            if ls.attributes["spawn_type"] == "start":
+                type_dict = dict(color="green", zorder=11, linewidth=2)
+            elif ls.attributes["spawn_type"] == "end":
+                type_dict = dict(color="red", zorder=11, linewidth=2)
+
         else:
             if ls.attributes["type"] not in unknown_linestring_types:
                 unknown_linestring_types.append(ls.attributes["type"])
