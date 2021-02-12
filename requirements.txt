@@ -7,4 +7,4 @@ pyproj
 numpy
 matplotlib
 
-#### use `utils/test_imports.py` to test whether you have all necessary packages installed
+#### use `utils/check_imports.py` to test whether you have all necessary packages installed
