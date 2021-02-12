@@ -28,7 +28,7 @@
   
 ## Participating the INTERPRET challenge
 
-We have organized a trajectory prediction challenge ([the INTERPRET challenge] (http://challenge.interaction-dataset.com/prediction-challenge/intro)) based on the INTERACTION data. 
+We have organized a trajectory prediction challenge ([the INTERPRET challenge](http://challenge.interaction-dataset.com/prediction-challenge/intro)) based on the INTERACTION data. 
 
 The INTERPRET challenge includes three tracks: 
 
