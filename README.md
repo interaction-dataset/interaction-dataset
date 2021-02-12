@@ -1,5 +1,5 @@
 # Python Scripts for the INTERACTION dataset
-
+[![CI](https://github.com/interaction-dataset/interaction-dataset/workflows/CI/badge.svg)](https://github.com/interaction-dataset/interaction-dataset/actions)
 * these scripts assist you in processing and visualizing the Interaction Dataset
 * for details about and access to the dataset, visit https://interaction-dataset.com/
 
