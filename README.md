@@ -1,10 +1,7 @@
-[TOC]
+# Python Scripts for the INTERACTION dataset
 
-# Python Scripts for the INTERACTION dataset 
-
-* these scripts assist you to visualize the INTERACTION dataset.
+* these scripts assist you in processing and visualizing the Interaction Dataset
 * for details about and access to the dataset, visit https://interaction-dataset.com/
-*  `python3` is supported
 
 ## Required Python Packages
 * `csv`: for reading the csv track files
@@ -14,16 +11,13 @@
   * or
     * `pyproj`
     * `xml`
-* `numpy`, `os`,  `sys`,  `functools`, `shutil` and`argparse` for processing the data
-* `math`, `numpy`,`time` and `matplotlib` for visualizing the scenarios
+* `math`, `numpy`, `os`,`argparse`, `time` and `matplotlib` for visualizing the scenarios
 * use `test_imports.py` to test whether you have all necessary packages installed
 
-## Dataset Visualization
+## Usage
 
-### Usage 
-
-* copy/download the INTERACTION drone data into the right place
-  * copy/download the track files into the folder `recorded_trackfiles`, keep one folder per scenario, as in your download
+* copy/download the INTERACTION dataset into the right place
+  * copy/download the track files into the folder `recorded_tracks`, keep one folder per scenario, as in your download
   * copy/download the maps into the folder `maps`
   * your folder structure should look like in [folder-structure.md](doc/folder-structure.md)
 * to visualize the data
@@ -31,7 +25,7 @@
 * if you only want to load and work with the track files
   * run `./main_load_track_file.py <tracks_filename>` from folder `python` to load tracks
 
-### Test Usage without Dataset
+## Test Usage without Dataset
 
 * to test the visualization
   * run `./main_visualize_data.py .TestScenarioForScripts`
