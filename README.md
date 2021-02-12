@@ -24,7 +24,8 @@
   * run `./main_visualize_data.py .TestScenarioForScripts`
 * to test loading the data
   * run `./main_load_track_file.py ../recorded_trackfiles/.TestScenarioForScripts/vehicle_tracks_000.csv`
-
+  * or run the unittests `python -m unittest`
+  
 ## Participating the INTERPRET challenge
 
 We have organized a trajectory prediction challenge ([the INTERPRET challenge] (http://challenge.interaction-dataset.com/prediction-challenge/intro)) based on the INTERACTION data. 

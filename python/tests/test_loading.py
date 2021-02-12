@@ -8,7 +8,7 @@ from python.utils import dict_utils
 class TestDatasetReader(unittest.TestCase):
 
     def test_dataset_reade(self):
-        root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        root_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         tracks_dir = os.path.join(root_dir, "recorded_trackfiles")
         tracks_file = os.path.join(tracks_dir, ".TestScenarioForScripts/vehicle_tracks_000.csv")
 
