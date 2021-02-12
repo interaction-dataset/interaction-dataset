@@ -7,14 +7,6 @@ try:
 except ImportError:
     print("Could not import csv, but it's needed to load the track files.")
 
-try:
-    print("Trying to import csv (for loading track files).")
-    import shutil
-    print("ok")
-except ImportError:
-    print("Could not import shutil, but it's needed to load the track files.")
-
-
 lanelet2_ok = False
 try:
     print("\nTrying to import lanelet2 (for loading maps).")
@@ -97,11 +89,3 @@ try:
     print("ok")
 except ImportError:
     print("Could not import numpy.")
-
-try:
-    print("\nTrying to import functools (for visualizing tracks).")
-    import functools
-    print("ok")
-except ImportError:
-    print("Could not import functools.")
-
