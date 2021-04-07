@@ -21,13 +21,13 @@ class LL2XYProjector:
     def __init__(self, lat_origin, lon_origin):
         self.lat_origin = lat_origin
         self.lon_origin = lon_origin
-        self.zone = math.floor((lon_origin+180.)/6)+1  # works for most tiles, and for all in the dataset
+        self.zone = math.floor((lon_origin + 180.) / 6) + 1  # works for most tiles, and for all in the dataset
         self.p = pyproj.Proj(proj='utm', ellps='WGS84', zone=self.zone, datum='WGS84')
         [self.x_origin, self.y_origin] = self.p(lon_origin, lat_origin)
 
     def latlon2xy(self, lat, lon):
         [x, y] = self.p(lon, lat)
-        return [x-self.x_origin, y-self.y_origin]
+        return [x - self.x_origin, y - self.y_origin]
 
 
 def get_type(element):
@@ -73,7 +73,6 @@ def set_visible_area(point_dict, axes):
 
 
 def draw_map_without_lanelet(filename, axes, lat_origin, lon_origin):
-
     assert isinstance(axes, matplotlib.axes.Axes)
 
     axes.set_aspect('equal', adjustable='box')

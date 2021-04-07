@@ -25,7 +25,6 @@ def set_visible_area(laneletmap, axes):
 
 
 def draw_lanelet_map(laneletmap, axes):
-
     assert isinstance(axes, matplotlib.axes.Axes)
 
     set_visible_area(laneletmap, axes)

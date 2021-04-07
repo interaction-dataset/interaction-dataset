@@ -2,9 +2,11 @@
 
 try:
     import lanelet2
+
     use_lanelet2_lib = True
-except:
+except ImportError:
     import warnings
+
     string = "Could not import lanelet2. It must be built and sourced, " + \
              "see https://github.com/fzi-forschungszentrum-informatik/Lanelet2 for details."
     warnings.warn(string)
@@ -28,9 +30,9 @@ from utils import dict_utils
 def update_plot():
     global fig, timestamp, title_text, track_dictionary, patches_dict, text_dict, axes, pedestrian_dictionary
     # update text and tracks based on current timestamp
-    assert(timestamp <= timestamp_max), "timestamp=%i" % timestamp
-    assert(timestamp >= timestamp_min), "timestamp=%i" % timestamp
-    assert(timestamp % dataset_types.DELTA_TIMESTAMP_MS == 0), "timestamp=%i" % timestamp
+    assert (timestamp <= timestamp_max), "timestamp=%i" % timestamp
+    assert (timestamp >= timestamp_min), "timestamp=%i" % timestamp
+    assert (timestamp % dataset_types.DELTA_TIMESTAMP_MS == 0), "timestamp=%i" % timestamp
     percentage = (float(timestamp) / timestamp_max) * 100
     title_text.set_text("\nts = {} / {} ({:.2f}%)".format(timestamp, timestamp_max, percentage))
     tracks_vis.update_objects_plot(timestamp, patches_dict, text_dict, axes,
@@ -70,13 +72,13 @@ class FrameControlButton(object):
                 return
         playback_stopped = True
         if self.label == "<<":
-            timestamp -= 10*dataset_types.DELTA_TIMESTAMP_MS
+            timestamp -= 10 * dataset_types.DELTA_TIMESTAMP_MS
         elif self.label == "<":
             timestamp -= dataset_types.DELTA_TIMESTAMP_MS
         elif self.label == ">":
             timestamp += dataset_types.DELTA_TIMESTAMP_MS
         elif self.label == ">>":
-            timestamp += 10*dataset_types.DELTA_TIMESTAMP_MS
+            timestamp += 10 * dataset_types.DELTA_TIMESTAMP_MS
         timestamp = min(timestamp, timestamp_max)
         timestamp = max(timestamp, timestamp_min)
         update_plot()
@@ -87,11 +89,17 @@ if __name__ == "__main__":
     # provide data to be visualized
     parser = argparse.ArgumentParser()
     parser.add_argument("scenario_name", type=str, help="Name of the scenario (to identify map and folder for track "
-                        "files)", nargs="?")
+                                                        "files)", nargs="?")
     parser.add_argument("track_file_number", type=int, help="Number of the track file (int)", default=0, nargs="?")
     parser.add_argument("load_mode", type=str, help="Dataset to load (vehicle, pedestrian, or both)", default="both",
                         nargs="?")
     parser.add_argument("--start_timestamp", type=int, nargs="?")
+    parser.add_argument("--lat_origin", type=float,
+                        help="Latitude of the reference point for the projection of the lanelet map (float)",
+                        default=0.0, nargs="?")
+    parser.add_argument("--lon_origin", type=float,
+                        help="Longitude of the reference point for the projection of the lanelet map (float)",
+                        default=0.0, nargs="?")
     args = parser.parse_args()
 
     if args.scenario_name is None:
@@ -146,8 +154,8 @@ if __name__ == "__main__":
     fig.canvas.set_window_title("Interaction Dataset Visualization")
 
     # load and draw the lanelet2 map, either with or without the lanelet2 library
-    lat_origin = 0.  # origin is necessary to correctly project the lat lon values in the osm file to the local
-    lon_origin = 0.  # coordinates in which the tracks are provided; we decided to use (0|0) for every scenario
+    lat_origin = args.lat_origin  # origin is necessary to correctly project the lat lon values of the map to the local
+    lon_origin = args.lon_origin  # coordinates in which the tracks are provided; defaulting to (0|0) for every scenario
     print("Loading map...")
     if use_lanelet2_lib:
         projector = lanelet2.projection.UtmProjector(lanelet2.io.Origin(lat_origin, lon_origin))

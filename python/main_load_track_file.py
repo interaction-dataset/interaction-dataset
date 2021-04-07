@@ -21,11 +21,10 @@ if __name__ == "__main__":
 
     track = dict_utils.get_value_list(track_dictionary)[0]
     assert isinstance(track, dataset_types.Track)
-    print("Track with id " + str(track.track_id) + " lasts from ts " + str(track.time_stamp_ms_first) + \
+    print("Track with id " + str(track.track_id) + " lasts from ts " + str(track.time_stamp_ms_first) +
           " to ts " + str(track.time_stamp_ms_last) + ", so " +
           str((track.time_stamp_ms_last - track.time_stamp_ms_first) / 1000.) + " seconds.")
 
     motion_state = track.motion_states[track.time_stamp_ms_first]
     assert isinstance(motion_state, dataset_types.MotionState)
     print("Its initial motion state is " + str(motion_state))
-
