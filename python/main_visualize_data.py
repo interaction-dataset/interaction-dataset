@@ -92,8 +92,12 @@ if __name__ == "__main__":
     parser.add_argument("load_mode", type=str, help="Dataset to load (vehicle, pedestrian, or both)", default="both",
                         nargs="?")
     parser.add_argument("--start_timestamp", type=int, nargs="?")
-    parser.add_argument("--lat_origin", type=float, help="Latitude of reference point (float)", default=0.0, nargs="?")
-    parser.add_argument("--lon_origin", type=float, help="Longitude of reference point (float)", default=0.0, nargs="?")
+    parser.add_argument("--lat_origin", type=float,
+                        help="Latitude of the reference point for the projection of the lanelet map (float)",
+                        default=0.0, nargs="?")
+    parser.add_argument("--lon_origin", type=float,
+                        help="Longitude of the reference point for the projection of the lanelet map (float)",
+                        default=0.0, nargs="?")
     args = parser.parse_args()
 
     if args.scenario_name is None:
@@ -148,8 +152,8 @@ if __name__ == "__main__":
     fig.canvas.set_window_title("Interaction Dataset Visualization")
 
     # load and draw the lanelet2 map, either with or without the lanelet2 library
-    lat_origin = args.lat_origin # origin is necessary to correctly project the lat lon values in the osm file to the local
-    lon_origin = args.lon_origin # coordinates in which the tracks are provided; defaulting to (0|0) for every scenario
+    lat_origin = args.lat_origin  # origin is necessary to correctly project the lat lon values of the map to the local
+    lon_origin = args.lon_origin  # coordinates in which the tracks are provided; defaulting to (0|0) for every scenario
     print("Loading map...")
     if use_lanelet2_lib:
         projector = lanelet2.projection.UtmProjector(lanelet2.io.Origin(lat_origin, lon_origin))
