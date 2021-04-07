@@ -2,9 +2,11 @@
 
 try:
     import lanelet2
+
     use_lanelet2_lib = True
-except:
+except ImportError:
     import warnings
+
     string = "Could not import lanelet2. It must be built and sourced, " + \
              "see https://github.com/fzi-forschungszentrum-informatik/Lanelet2 for details."
     warnings.warn(string)
@@ -28,9 +30,9 @@ from utils import dict_utils
 def update_plot():
     global fig, timestamp, title_text, track_dictionary, patches_dict, text_dict, axes, pedestrian_dictionary
     # update text and tracks based on current timestamp
-    assert(timestamp <= timestamp_max), "timestamp=%i" % timestamp
-    assert(timestamp >= timestamp_min), "timestamp=%i" % timestamp
-    assert(timestamp % dataset_types.DELTA_TIMESTAMP_MS == 0), "timestamp=%i" % timestamp
+    assert (timestamp <= timestamp_max), "timestamp=%i" % timestamp
+    assert (timestamp >= timestamp_min), "timestamp=%i" % timestamp
+    assert (timestamp % dataset_types.DELTA_TIMESTAMP_MS == 0), "timestamp=%i" % timestamp
     percentage = (float(timestamp) / timestamp_max) * 100
     title_text.set_text("\nts = {} / {} ({:.2f}%)".format(timestamp, timestamp_max, percentage))
     tracks_vis.update_objects_plot(timestamp, patches_dict, text_dict, axes,
@@ -70,13 +72,13 @@ class FrameControlButton(object):
                 return
         playback_stopped = True
         if self.label == "<<":
-            timestamp -= 10*dataset_types.DELTA_TIMESTAMP_MS
+            timestamp -= 10 * dataset_types.DELTA_TIMESTAMP_MS
         elif self.label == "<":
             timestamp -= dataset_types.DELTA_TIMESTAMP_MS
         elif self.label == ">":
             timestamp += dataset_types.DELTA_TIMESTAMP_MS
         elif self.label == ">>":
-            timestamp += 10*dataset_types.DELTA_TIMESTAMP_MS
+            timestamp += 10 * dataset_types.DELTA_TIMESTAMP_MS
         timestamp = min(timestamp, timestamp_max)
         timestamp = max(timestamp, timestamp_min)
         update_plot()
@@ -87,7 +89,7 @@ if __name__ == "__main__":
     # provide data to be visualized
     parser = argparse.ArgumentParser()
     parser.add_argument("scenario_name", type=str, help="Name of the scenario (to identify map and folder for track "
-                        "files)", nargs="?")
+                                                        "files)", nargs="?")
     parser.add_argument("track_file_number", type=int, help="Number of the track file (int)", default=0, nargs="?")
     parser.add_argument("load_mode", type=str, help="Dataset to load (vehicle, pedestrian, or both)", default="both",
                         nargs="?")

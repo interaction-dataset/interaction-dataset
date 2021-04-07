@@ -31,7 +31,6 @@ def polygon_xy_from_motionstate_pedest(ms, width, length):
 
 
 def update_objects_plot(timestamp, patches_dict, text_dict, axes, track_dict=None, pedest_dict=None):
-
     if track_dict is not None:
 
         for key, value in track_dict.items():
@@ -75,8 +74,8 @@ def update_objects_plot(timestamp, patches_dict, text_dict, axes, track_dict=Non
                     width = 1.5
                     length = 1.5
 
-                    rect = matplotlib.patches.Polygon(polygon_xy_from_motionstate_pedest(ms, width, length), closed=True,
-                                                      zorder=20, color='red')
+                    rect = matplotlib.patches.Polygon(polygon_xy_from_motionstate_pedest(ms, width, length),
+                                                      closed=True, zorder=20, color='red')
                     patches_dict[key] = rect
                     axes.add_patch(rect)
                     text_dict[key] = axes.text(ms.x, ms.y + 2, str(key), horizontalalignment='center', zorder=30)
@@ -91,4 +90,3 @@ def update_objects_plot(timestamp, patches_dict, text_dict, axes, track_dict=Non
                     patches_dict.pop(key)
                     text_dict[key].remove()
                     text_dict.pop(key)
-

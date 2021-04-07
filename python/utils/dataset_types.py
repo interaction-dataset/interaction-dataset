@@ -31,10 +31,10 @@ class Track:
 
     def __str__(self):
         string = "Track: track_id=" + str(self.track_id) + ", agent_type=" + str(self.agent_type) + \
-               ", length=" + str(self.length) + ", width=" + str(self.width) + \
-               ", time_stamp_ms_first=" + str(self.time_stamp_ms_first) + \
-               ", time_stamp_ms_last=" + str(self.time_stamp_ms_last) + \
-               "\n motion_states:"
+                 ", length=" + str(self.length) + ", width=" + str(self.width) + \
+                 ", time_stamp_ms_first=" + str(self.time_stamp_ms_first) + \
+                 ", time_stamp_ms_last=" + str(self.time_stamp_ms_last) + \
+                 "\n motion_states:"
         for key, value in sorted(self.motion_states.items()):
             string += "\n    " + str(key) + ": " + str(value)
         return string
