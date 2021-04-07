@@ -24,3 +24,20 @@ jobs:
       # Execute unit tests
       - name: test
         run: python -m unittest
+
+  autopep8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: install autopep8
+        run: python -m pip install autopep8
+
+      # Run autopep8
+      - name: run autopep8
+        run: autopep8 python --recursive --diff --verbose --exit-code --max-line-length 120
