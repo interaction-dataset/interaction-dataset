@@ -40,3 +40,5 @@ For detailed instructions for the "regular" and "generalizability" tracks, pleas
 
 For detailed instructions for the "Closed-loop" track, please visit [INTERPRET_challenge_Closed_loop](https://github.com/interaction-dataset/INTERPRET_challenge_Closed_loop).
 
+## License
+This package is distributed under the 3-Clause BSD License, see [LICENSE](LICENSE).
